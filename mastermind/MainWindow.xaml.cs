@@ -60,6 +60,9 @@ namespace mastermind
         //lijst met opgeslagen scores
         private int highscoreCount = 0; // Huidig aantal opgeslagen scores
 
+        //lijst met spelernamen
+        List<string> playerNames = new List<string>();
+
 
 
 
@@ -81,12 +84,20 @@ namespace mastermind
         private void StartGame()
         {
             //Ask the players name
-            nameInput = Interaction.InputBox("Geef uw naam op", "Invoer", "", 500);
-            while (string.IsNullOrEmpty(nameInput))
+            MessageBoxResult result;
+            do
             {
-                MessageBox.Show("Geef je naam!", "Foutieve invoer");
                 nameInput = Interaction.InputBox("Geef uw naam op", "Invoer", "", 500);
+                while (string.IsNullOrEmpty(nameInput))
+                {
+                    MessageBox.Show("Geef je naam!", "Foutieve invoer");
+                    nameInput = Interaction.InputBox("Geef uw naam op", "Invoer", "", 500);
+                }
+                playerNames.Add(nameInput);
+                nameInput = "";
+                result = MessageBox.Show("Wilt u nog spelers toevoegen?", "Solo, of niet? :)", MessageBoxButton.YesNo, MessageBoxImage.Question);
             }
+            while (result == MessageBoxResult.Yes);
 
             codeCracked= false;
             gameEnded= false;
