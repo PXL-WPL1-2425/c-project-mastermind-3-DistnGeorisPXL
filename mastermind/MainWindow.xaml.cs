@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -253,7 +254,7 @@ namespace mastermind
         }
 
 
-
+        
 
         private void AddHighscore(string name, int attempts, int score)
         {
@@ -473,7 +474,6 @@ namespace mastermind
                 secretCodeTextBox.Text = "Mastermind oplossing: " + string.Join(", ", secretCode);
             }
         }
-
 
 
 
@@ -853,6 +853,39 @@ namespace mastermind
 
         }
 
+        private void colorHintButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show($"Weet u zeker dat u een kleur als hint wilt kopen?\nLET OP: Dit kost 15 strafpunten!\n\nDeze hints worden willekeurig gegenereerd en houden niet rekening met vorige hints. Het is dus mogelijk om de zelfde hint meerdere keren te krijgen!", $"Bevestigen", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            AddHighscore(nameInput, attempts, playerScore); // Voeg de highscore toe
+            if (result == MessageBoxResult.Yes)
+            {
+                Random random = new Random();
+                int randomNumber = random.Next(0, 4);
 
+                MessageBox.Show($"Een juiste kleur is: {secretCode[randomNumber]}", "Hint gekocht!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                playerScore -= 15;
+                playerScoreTextBox.Text = $"Score: {playerScore}/100   ({nameInput})";
+
+                return;
+
+            }
+        }
+
+        private void colorAndPositionHintButton_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result = MessageBox.Show($"Weet u zeker dat u een kleur + positie als hint wilt kopen?\nLET OP: Dit kost 25 strafpunten!\n\nDeze hints worden willekeurig gegenereerd en houden niet rekening met vorige hints. Het is dus mogelijk om de zelfde hint meerdere keren te krijgen!", $"Bevestigen", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            AddHighscore(nameInput, attempts, playerScore); // Voeg de highscore toe
+            if (result == MessageBoxResult.Yes)
+            {
+                Random random = new Random();
+                int randomNumber = random.Next(0, 4);
+                MessageBox.Show($"Een juiste kleur is: {secretCode[randomNumber]}\nJuiste positie is: {randomNumber+1}", "Hint gekocht!", MessageBoxButton.OK, MessageBoxImage.Warning);
+                playerScore -= 25;
+                playerScoreTextBox.Text = $"Score: {playerScore}/100   ({nameInput})";
+
+                return;
+            }
+
+        }
     }
 }
