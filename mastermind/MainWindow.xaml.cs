@@ -139,7 +139,7 @@ namespace mastermind
             secretCodeTextBox.Text = "Mastermind oplossing: " + string.Join(", ", secretCode);
             attempts = 0;
             playerScore = 100;
-            playerScoreTextBox.Text = $"Score: {playerScore}/100";
+            playerScoreTextBox.Text = $"Score: {playerScore}/100   ({nameInput})";
             StartCountdown();
             this.Title = $"Mastermind - poging {attempts}/{maxAttempts}";
             codeCracked = false;
@@ -719,13 +719,13 @@ namespace mastermind
                 {
                     SetLabelBorder(i, Colors.Wheat); // Witte rand voor correcte kleur maar verkeerde positie
                         playerScore--;
-                        playerScoreTextBox.Text = $"Score: {playerScore}/100";
+                        playerScoreTextBox.Text = $"Score: {playerScore}/100   ({nameInput})";
                     }
                 else
                 {
                     SetLabelBorder(i, Colors.Transparent); // Geen rand als de kleur niet in de code zit
                         playerScore -= 2;
-                        playerScoreTextBox.Text = $"Score: {playerScore}/100";
+                        playerScoreTextBox.Text = $"Score: {playerScore}/100   ({nameInput})";
                     }
             }
 
