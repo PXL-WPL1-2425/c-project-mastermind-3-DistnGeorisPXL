@@ -85,21 +85,25 @@ namespace mastermind
         {
             //Ask the players name
             MessageBoxResult result;
-            do
+            if(playerNames.Count == 0)
             {
-                nameInput = Interaction.InputBox("Geef uw naam op", "Invoer", "", 500);
-                while (string.IsNullOrEmpty(nameInput))
+                do
                 {
-                    MessageBox.Show("Geef je naam!", "Foutieve invoer");
                     nameInput = Interaction.InputBox("Geef uw naam op", "Invoer", "", 500);
+                    while (string.IsNullOrEmpty(nameInput))
+                    {
+                        MessageBox.Show("Geef je naam!", "Foutieve invoer");
+                        nameInput = Interaction.InputBox("Geef uw naam op", "Invoer", "", 500);
+                    }
+                    playerNames.Add(nameInput);
+                    nameInput = "";
+                    result = MessageBox.Show("Wilt u nog spelers toevoegen?", "Solo, of niet? :)", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 }
-                playerNames.Add(nameInput);
-                nameInput = "";
-                result = MessageBox.Show("Wilt u nog spelers toevoegen?", "Solo, of niet? :)", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                while (result == MessageBoxResult.Yes);
             }
-            while (result == MessageBoxResult.Yes);
 
-            codeCracked= false;
+            nameInput = playerNames[0];
+            codeCracked = false;
             gameEnded= false;
 
 
@@ -146,30 +150,105 @@ namespace mastermind
 
         private void EndGame()
         {
-            if(codeCracked)
+            playerNames.RemoveAt(0);
+            if (playerNames.Count() > 0)
             {
-                MessageBox.Show($"Code gekraakt in {attempts} pogingen.", "WON", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                AddHighscore(nameInput, attempts, playerScore); // Voeg de highscore toe
+                if (codeCracked)
+                {
+                    MessageBoxResult result = MessageBox.Show($"Code gekraakt in {attempts} pogingen.\nNu is de beurt aan {playerNames[0]}", $"{nameInput}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    AddHighscore(nameInput, attempts, playerScore); // Voeg de highscore toe
+                    if (result == MessageBoxResult.OK)
+                    {
+                        _countdownTimer.Stop();
+                        secretCode.Clear();
+                        label1.Background = System.Windows.Media.Brushes.White;
+                        label1.BorderBrush = System.Windows.Media.Brushes.White;
+                        label2.Background = System.Windows.Media.Brushes.White;
+                        label2.BorderBrush = System.Windows.Media.Brushes.White;
+                        label3.Background = System.Windows.Media.Brushes.White;
+                        label3.BorderBrush = System.Windows.Media.Brushes.White;
+                        label4.Background = System.Windows.Media.Brushes.White;
+                        label4.BorderBrush = System.Windows.Media.Brushes.White;
+                        comboBox1.SelectedItem = -1;
+                        comboBox2.SelectedItem = -1;
+                        comboBox3.SelectedItem = -1;
+                        comboBox4.SelectedItem = -1;
+                        StartGame();
+                    }
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show($"You failed! De corecte code was " + string.Join(", ", secretCode) + $".\nNu is de beurt aan {playerNames[0]}", $"{nameInput}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    AddHighscore(nameInput, attempts, playerScore); // Voeg de highscore toe
+                    if (result == MessageBoxResult.OK)
+                    {
+                        _countdownTimer.Stop();
+                        secretCode.Clear();
+                        label1.Background = System.Windows.Media.Brushes.White;
+                        label1.BorderBrush = System.Windows.Media.Brushes.White;
+                        label2.Background = System.Windows.Media.Brushes.White;
+                        label2.BorderBrush = System.Windows.Media.Brushes.White;
+                        label3.Background = System.Windows.Media.Brushes.White;
+                        label3.BorderBrush = System.Windows.Media.Brushes.White;
+                        label4.Background = System.Windows.Media.Brushes.White;
+                        label4.BorderBrush = System.Windows.Media.Brushes.White;
+                        comboBox1.SelectedItem = -1;
+                        comboBox2.SelectedItem = -1;
+                        comboBox3.SelectedItem = -1;
+                        comboBox4.SelectedItem = -1;
+                        StartGame();
+                    }
+                }
             }
             else
             {
-                MessageBox.Show($"You failed! De corecte code was " + string.Join(", ", secretCode) + ".", "FAILED", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                AddHighscore(nameInput, attempts, playerScore); // Voeg de highscore toe
+                if (codeCracked)
+                {
+                    MessageBoxResult result = MessageBox.Show($"Code gekraakt in {attempts} pogingen.", $"{nameInput}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    AddHighscore(nameInput, attempts, playerScore); // Voeg de highscore toe
+                    if (result == MessageBoxResult.OK)
+                    {
+                        _countdownTimer.Stop();
+                        secretCode.Clear();
+                        label1.Background = System.Windows.Media.Brushes.White;
+                        label1.BorderBrush = System.Windows.Media.Brushes.White;
+                        label2.Background = System.Windows.Media.Brushes.White;
+                        label2.BorderBrush = System.Windows.Media.Brushes.White;
+                        label3.Background = System.Windows.Media.Brushes.White;
+                        label3.BorderBrush = System.Windows.Media.Brushes.White;
+                        label4.Background = System.Windows.Media.Brushes.White;
+                        label4.BorderBrush = System.Windows.Media.Brushes.White;
+                        comboBox1.SelectedItem = -1;
+                        comboBox2.SelectedItem = -1;
+                        comboBox3.SelectedItem = -1;
+                        comboBox4.SelectedItem = -1;
+                        StartGame();
+                    }
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show($"You failed! De corecte code was " + string.Join(", ", secretCode) + ".", $"{nameInput}", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                    AddHighscore(nameInput, attempts, playerScore); // Voeg de highscore toe
+                    if (result == MessageBoxResult.OK)
+                    {
+                        _countdownTimer.Stop();
+                        secretCode.Clear();
+                        label1.Background = System.Windows.Media.Brushes.White;
+                        label1.BorderBrush = System.Windows.Media.Brushes.White;
+                        label2.Background = System.Windows.Media.Brushes.White;
+                        label2.BorderBrush = System.Windows.Media.Brushes.White;
+                        label3.Background = System.Windows.Media.Brushes.White;
+                        label3.BorderBrush = System.Windows.Media.Brushes.White;
+                        label4.Background = System.Windows.Media.Brushes.White;
+                        label4.BorderBrush = System.Windows.Media.Brushes.White;
+                        comboBox1.SelectedItem = -1;
+                        comboBox2.SelectedItem = -1;
+                        comboBox3.SelectedItem = -1;
+                        comboBox4.SelectedItem = -1;
+                        StartGame();
+                    }
+                }
             }
-            _countdownTimer.Stop();
-            secretCode.Clear();
-            label1.Background = System.Windows.Media.Brushes.White;
-            label1.BorderBrush = System.Windows.Media.Brushes.White;
-            label2.Background = System.Windows.Media.Brushes.White;
-            label2.BorderBrush = System.Windows.Media.Brushes.White;
-            label3.Background = System.Windows.Media.Brushes.White;
-            label3.BorderBrush = System.Windows.Media.Brushes.White;
-            label4.Background = System.Windows.Media.Brushes.White;
-            label4.BorderBrush = System.Windows.Media.Brushes.White;
-            comboBox1.SelectedItem = -1;
-            comboBox2.SelectedItem = -1;
-            comboBox3.SelectedItem = -1;
-            comboBox4.SelectedItem = -1;
 
         }
 
