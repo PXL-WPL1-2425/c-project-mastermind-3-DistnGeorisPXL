@@ -22,16 +22,16 @@
         <ComboBox Name="comboBox3" HorizontalAlignment="Left" Margin="400,29,0,0" VerticalAlignment="Top" Width="180" SelectionChanged="ComboBox_SelectionChanged"/>
         <ComboBox Name="comboBox4" HorizontalAlignment="Left" Margin="580,29,0,0" VerticalAlignment="Top" Width="180" SelectionChanged="ComboBox_SelectionChanged"/>
         <Button Content="Check Code" HorizontalAlignment="Center" Margin="0,230,0,0" VerticalAlignment="Top" Height="40" Width="120" Click="CheckButton_Click"/>
-        <Label Name="label1" Content="" HorizontalAlignment="Left" Margin="40,51,0,0" VerticalAlignment="Top" Height="166" Width="180"/>
-        <Label Name="label2" Content="" HorizontalAlignment="Left" Margin="220,51,0,0" VerticalAlignment="Top" Height="166" Width="180"/>
-        <Label Name="label3" Content="" HorizontalAlignment="Left" Margin="400,51,0,0" VerticalAlignment="Top" Height="166" Width="180"/>
-        <Label Name="label4" Content="" HorizontalAlignment="Left" Margin="580,51,0,0" VerticalAlignment="Top" Height="166" Width="180"/>
+        <Label Name="label1" Content="" HorizontalAlignment="Left" Margin="40,51,0,0" VerticalAlignment="Top" Height="166" Width="180" ToolTip=""/>
+        <Label Name="label2" Content="" HorizontalAlignment="Left" Margin="220,51,0,0" VerticalAlignment="Top" Height="166" Width="180" ToolTip=""/>
+        <Label Name="label3" Content="" HorizontalAlignment="Left" Margin="400,51,0,0" VerticalAlignment="Top" Height="166" Width="180" ToolTip=""/>
+        <Label Name="label4" Content="" HorizontalAlignment="Left" Margin="580,51,0,0" VerticalAlignment="Top" Height="166" Width="180" ToolTip=""/>
         <Label Name="timerLabel" Content="Tijd voor kans voorbij gaat: X seconden" HorizontalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,3,0,0" VerticalAlignment="Top" Width="244"/>
         <TextBox Name="secretCodeTextBox" HorizontalAlignment="Left" Margin="40,354,0,0" IsReadOnly="true" TextWrapping="Wrap" Text="Kleur code:" VerticalAlignment="Top" Width="270" Visibility="Hidden"/>
         <ListBox x:Name="attemptsListBox" Margin="340,283,66,33" />
         <TextBox Name="playerScoreTextBox" HorizontalAlignment="Left" Margin="537,241,0,0" TextWrapping="Wrap" Text="Score: 100/100" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Hints kopen" HorizontalAlignment="Left" Margin="98,250,0,155" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"  Width="154"/>
-        <Button Name="colorHintButton" Content="Kleur" HorizontalAlignment="Left" Margin="85,293,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="colorHintButton_Click"/>
+        <Button Name="colorHintButton" Content="Kleur" HorizontalAlignment="Left" Margin="66,293,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="colorHintButton_Click"/>
         <Button Name="colorAndPositionHintButton" Content="Kleur + positie" HorizontalAlignment="Left" Margin="182,293,0,0" VerticalAlignment="Top" Width="90" Height="30" Click="colorAndPositionHintButton_Click"/>
+        <Label Content="Hints kopen" HorizontalAlignment="Left" Margin="130,262,0,0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

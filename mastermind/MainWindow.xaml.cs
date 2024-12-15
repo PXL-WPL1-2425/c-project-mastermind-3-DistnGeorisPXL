@@ -40,6 +40,8 @@ namespace mastermind
 
         int attemptsInput;
 
+        string tooltip;
+
 
 
 
@@ -714,16 +716,64 @@ namespace mastermind
                 if (userInput[i] == secretCode[i])
                 {
                     SetLabelBorder(i, Colors.DarkRed); // Rode rand voor correcte positie
-                }
+                        switch (i)
+                        {
+                            case 0:
+                                label1.ToolTip = "Juiste kleur, juiste positie";
+                                break;
+                            case 1:
+                                label2.ToolTip = "Juiste kleur, juiste positie";
+                                break;
+                            case 2:
+                                label3.ToolTip = "Juiste kleur, juiste positie";
+                                break;
+                            case 3:
+                                label4.ToolTip = "Juiste kleur, juiste positie";
+                                break;
+                        }
+                    }
                 else if (secretCode.Contains(userInput[i]))
                 {
                     SetLabelBorder(i, Colors.Wheat); // Witte rand voor correcte kleur maar verkeerde positie
+
+                        switch (i)
+                        {
+                            case 0:
+                                label1.ToolTip = "Juiste kleur, foute positie";
+                                break;
+                            case 1:
+                                label2.ToolTip = "Juiste kleur, foute positie";
+                                break;
+                            case 2:
+                                label3.ToolTip = "Juiste kleur, foute positie";
+                                break;
+                            case 3:
+                                label4.ToolTip = "Juiste kleur, foute positie";
+                                break;
+                        }
+                        
+
                         playerScore--;
                         playerScoreTextBox.Text = $"Score: {playerScore}/100   ({nameInput})";
                     }
                 else
                 {
                     SetLabelBorder(i, Colors.Transparent); // Geen rand als de kleur niet in de code zit
+                        switch (i)
+                        {
+                            case 0:
+                                label1.ToolTip = "Foute kleur";
+                                break;
+                            case 1:
+                                label2.ToolTip = "Foute kleur";
+                                break;
+                            case 2:
+                                label3.ToolTip = "Foute kleur";
+                                break;
+                            case 3:
+                                label4.ToolTip = "Foute kleur";
+                                break;
+                        }
                         playerScore -= 2;
                         playerScoreTextBox.Text = $"Score: {playerScore}/100   ({nameInput})";
                     }
@@ -749,11 +799,6 @@ namespace mastermind
                 MessageBox.Show("Het spel is al beeindigd, U heeft maximum aantal kansen gebruikt.");
             }
         }
-
-
-
-
-
 
 
 
